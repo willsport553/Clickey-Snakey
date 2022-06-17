@@ -4,9 +4,9 @@ import random
 pygame.init()
 
 # Colors
-white = (255, 255, 255)
-red = (255, 0, 0)
-black = (0, 0, 0)
+light_blue = (173,216,230)
+dark_blue = (0,0,139)
+orange = (255,140,0)
 
 # Creating window
 screen_width = 900
@@ -14,7 +14,7 @@ screen_height = 600
 gameWindow = pygame.display.set_mode((screen_width, screen_height))
 
 # Game Title
-pygame.display.set_caption("Clckey Snake")
+pygame.display.set_caption("Clickey Snake")
 pygame.display.update()
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 55)
@@ -33,10 +33,10 @@ def welcome():
     exit_game = False
     while not exit_game:
         gameWindow.fill((233,210,229))
-        text_screen("Welcome to Clickey Snake without the Clickey", black, 10, 100)
-        text_screen("Instructions - Use arrow key and collect as many fuit without collison", black, 5, 400)
-        text_screen("fruit without hitting the wall or tail", black, 5, 450)
-        text_screen("Press Space Bar To Play", black, 232, 290)
+        text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 100)
+        text_screen("Instructions - Use arrow key and collect as many fuit without collison", orange, 5, 400)
+        text_screen("fruit without hitting the wall or tail", orange, 5, 450)
+        text_screen("Press Space Bar To Play", orange, 232, 290)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
@@ -67,8 +67,8 @@ def gameloop():
     fps = 60
     while not exit_game:
         if game_over:
-            gameWindow.fill(white)
-            text_screen("Game Over! Press Enter To Continue", red, 100, 250)
+            gameWindow.fill(light_blue)
+            text_screen("Game Over! Press Enter To Continue", dark_blue, 100, 250)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -110,9 +110,9 @@ def gameloop():
                 food_y = random.randint(20, screen_height / 2)
                 snk_length +=5
 
-            gameWindow.fill(white)
-            text_screen("Score: " + str(score * 10), red, 5, 5)
-            pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
+            gameWindow.fill(light_blue)
+            text_screen("Score: " + str(score * 10), dark_blue, 5, 5)
+            pygame.draw.rect(gameWindow, dark_blue, [food_x, food_y, snake_size, snake_size])
 
 
             head = []
@@ -128,7 +128,7 @@ def gameloop():
 
             if snake_x<0 or snake_x>screen_width or snake_y<0 or snake_y>screen_height:
                 game_over = True
-            plot_snake(gameWindow, black, snk_list, snake_size)
+            plot_snake(gameWindow, orange, snk_list, snake_size)
         pygame.display.update()
         clock.tick(fps)
 
