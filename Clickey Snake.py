@@ -18,6 +18,7 @@ pygame.display.set_caption("Clickey Snake")
 pygame.display.update()
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 55)
+user_text = ''
 
 def text_screen(text, color, x, y):
     screen_text = font.render(text, True, color)
@@ -33,6 +34,8 @@ def welcome():
     exit_game = False
     while not exit_game:
         gameWindow.fill((233,210,229))
+        text_surface = font.render(user_text, True, orange)
+        gameWindow.blit(text_surface, (0,0))
         text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 100)
         text_screen("Instructions - Use arrow key and collect as many fuit without collison", orange, 5, 400)
         text_screen("fruit without hitting the wall or tail", orange, 5, 450)
