@@ -46,7 +46,7 @@ def welcome():
         gameWindow.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
         input_rect.w = max(100, text_surface.get_width() + 15)
         text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 50)
-        text_screen("Enter Snake Speed Below - Recommonded Between 5 and 15 ", orange, 10, 180)
+        text_screen("Enter Snake Speed Below, Must Between 5, 20 or cant start game ", orange, 5, 180)
         text_screen("Game Will Close If Text Input", orange, 10, 220)
         text_screen("Instructions - Use arrow key and collect as many fuit without ", orange, 5, 400)
         text_screen("hitting the wall or tail", orange, 5, 450)
@@ -61,7 +61,8 @@ def welcome():
                     user_text += event.unicode
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    gameloop()
+                        if int(user_text) < 20 and int(user_text) > 5:
+                          gameloop()
 
         pygame.display.update()
         clock.tick(60)
