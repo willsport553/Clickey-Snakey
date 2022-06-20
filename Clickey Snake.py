@@ -1,3 +1,4 @@
+from numpy import unicode_
 import pygame
 import random
 
@@ -17,8 +18,11 @@ gameWindow = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Clickey Snake")
 pygame.display.update()
 clock = pygame.time.Clock()
-font = pygame.font.SysFont(None, 55)
+font = pygame.font.SysFont(None, 40)
 user_text = ''
+
+input_rect = pygame.Rect(300, 250, 140, 32)
+# color = pygame.Color('lightskyblue3')
 
 def text_screen(text, color, x, y):
     screen_text = font.render(text, True, color)
@@ -31,20 +35,32 @@ def plot_snake(gameWindow, color, snk_list, snake_size):
 
 
 def welcome():
+    """_summary_
+    """
+    global user_text
     exit_game = False
     while not exit_game:
         gameWindow.fill((233,210,229))
+        pygame.draw.rect(gameWindow, dark_blue, input_rect, 2)
         text_surface = font.render(user_text, True, orange)
-        gameWindow.blit(text_surface, (0,0))
-        text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 100)
-        text_screen("Instructions - Use arrow key and collect as many fuit without collison", orange, 5, 400)
-        text_screen("fruit without hitting the wall or tail", orange, 5, 450)
-        text_screen("Press Space Bar To Play", orange, 232, 290)
+        gameWindow.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
+        input_rect.w = max(100, text_surface.get_width() + 15)
+        text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 50)
+        text_screen("Enter Snake Speed Below - Recommonded Between 5 and 15 ", orange, 10, 180)
+        text_screen("Game Will Close If Text Input", orange, 10, 220)
+        text_screen("Instructions - Use arrow key and collect as many fuit without ", orange, 5, 400)
+        text_screen("hitting the wall or tail", orange, 5, 450)
+        text_screen("Press Enter To Play", orange, 232, 290)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key ==pygame.K_BACKSPACE:
+                    user_text = user_text[0:-1]
+                else:
+                    user_text += event.unicode
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
                     gameloop()
 
         pygame.display.update()
@@ -65,7 +81,7 @@ def gameloop():
     food_x = random.randint(20, screen_width / 2)
     food_y = random.randint(20, screen_height / 2)
     score = 0
-    init_velocity = 5
+    init_velocity = int(user_text)
     snake_size = 30
     fps = 60
     while not exit_game:
