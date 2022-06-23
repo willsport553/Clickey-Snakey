@@ -21,8 +21,8 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 40)
 user_text = ''
 
-input_rect = pygame.Rect(300, 250, 140, 32)
-# color = pygame.Color('lightskyblue3')
+input_rect = pygame.Rect(10, 260, 200, 32)
+
 
 def text_screen(text, color, x, y):
     screen_text = font.render(text, True, color)
@@ -40,17 +40,18 @@ def welcome():
     global user_text
     exit_game = False
     while not exit_game:
-        gameWindow.fill((233,210,229))
-        pygame.draw.rect(gameWindow, dark_blue, input_rect, 2)
+        gameWindow.fill((dark_blue))
+        pygame.draw.rect(gameWindow, light_blue, input_rect, 4)
         text_surface = font.render(user_text, True, orange)
         gameWindow.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
         input_rect.w = max(100, text_surface.get_width() + 15)
-        text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 50)
-        text_screen("Enter Snake Speed Below, Must Between 5, 15 or cant start game ", orange, 5, 180)
-        text_screen("Game Will Close If Text Input", orange, 10, 220)
-        text_screen("Instructions - Use arrow key and collect as many fuit without ", orange, 5, 400)
-        text_screen("hitting the wall or tail", orange, 5, 450)
-        text_screen("Press Enter To Play", orange, 232, 290)
+        text_screen("Welcome to Clickey Snake without the Clickey", orange, 10, 70)
+        text_screen("Enter Snake Speed Below, Must Between 5, 15 or can't start game ", light_blue, 10, 180)
+        text_screen("Game Will Close If Text Input", light_blue, 10, 220)
+        text_screen("Instructions  ", orange, 10, 400)
+        text_screen("Use arrow key and collect as many fuit ", orange, 10, 460)
+        text_screen("without hitting the wall or tail", orange, 10, 490)
+        text_screen("Press Enter To Play", orange, 10, 340)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
