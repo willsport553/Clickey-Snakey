@@ -61,7 +61,7 @@ def welcome():
                     user_text += event.unicode
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                        if int(user_text) < 15 and int(user_text) > 5:
+                        if int(user_text) < 16 and int(user_text) > 4:
                           gameloop()
 
         pygame.display.update()
